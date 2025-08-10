@@ -1,0 +1,88 @@
+1️⃣ Python Basics Recap
+
+Python is widely used in ML because it’s:
+
+Easy to read & write
+
+Has powerful ML/data libraries (NumPy, Pandas, scikit-learn, PyTorch)
+---------------------------------------------------------------------
+Variables & Data Types
+
+
+# Variable assignment
+name = "Gauraw"
+age = 25
+height = 5.9
+is_learning = True
+
+print(name, age, height, is_learning)
+
+-----------------------------------------------------------------------
+Lists
+A list stores multiple items.
+
+
+fruits = ["apple", "banana", "cherry"]
+print(fruits[0])   # apple
+fruits.append("orange")
+print(fruits)
+
+-------------------------------------------------------------------------
+Dictionaries
+
+Key-value pairs — great for structured data.
+
+
+person = {"name": "Gauraw", "role": "ML Engineer", "experience": 0}
+print(person["name"])
+person["experience"] = 1
+print(person)
+
+--------------------------------------------------------------------------
+
+If-Else
+
+score = 85
+if score >= 90:
+    print("Excellent")
+elif score >= 70:
+    print("Good")
+else:
+    print("Needs Improvement")
+
+
+----------------------------------------------------------------------------
+Loops
+
+for fruit in fruits:
+    print(fruit)
+
+count = 0
+while count < 3:
+    print("Looping...", count)
+    count += 1
+	
+------------------------------------------------------------------------------
+Task for Day 1
+
+Create a list of 5 machine learning topics you want to learn.
+
+Create a dictionary for your “learning profile” with keys:
+
+name
+
+weekly_hours
+
+current_goal
+
+Write a loop to print each topic in your list.
+
+Do you want me to give you the solutions after you try them, or should we solve them together right now?
+
+
+
+
+
+
+
+Ask ChatGPT
