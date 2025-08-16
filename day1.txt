@@ -77,12 +77,18 @@ current_goal
 
 Write a loop to print each topic in your list.
 
-Do you want me to give you the solutions after you try them, or should we solve them together right now?
 
+-----------------------------------------------------------------------------
 
+Boolean conversion in python:
+Python has a bool function which turns things into bools
 
+print(bool(1)) # all numbers are treated as true, except 0
+print(bool(0))
+print(bool("asf")) # all strings are treated as true, except the empty string ""
+print(bool(""))
 
-
-
-
-Ask ChatGPT
+True
+False
+True
+False
