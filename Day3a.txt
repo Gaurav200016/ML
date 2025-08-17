@@ -1,0 +1,24 @@
+Quick quiz (5 Qs)
+
+---------------------------------------------------------------------------------------------------------------------
+You want a full roster from students with scores if present in marks. Which join?
+--> left join
+----------------------------------------------------------------------------------------------------------------------
+
+You need to merge on left key = "ID" and right key = "student_id". Write the pd.merge(...) line (just the parameters)
+-->
+pd.merge(df1,df2, left_on="ID", right_on="student_id")
+
+----------------------------------------------------------------------------------------------------------------------
+
+You merged two DataFrames that both have a City column. How do you avoid column clashes and keep both?
+-->
+By using suffix (suffixes=) parameter
+-----------------------------------------------------------------------------------------------------------------------
+
+After an outer merge with indicator=True, how do you filter rows that existed only in the left table?
+-->
+df=df[df["_merge"]=="left_only"]
+-----------------------------------------------------------------------------------------------------------------------
+What happens if you merge where both sides have duplicate keys and you use how="inner"? (One sentence.)
+it will create to duplication

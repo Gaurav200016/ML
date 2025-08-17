@@ -1,0 +1,48 @@
+Theory: Merging & Joining in Pandas
+
+In real-world datasets, data is often split across multiple tables. For example:
+
+One DataFrame has student details
+
+Another DataFrame has marks
+
+To analyze, we need to merge them (similar to SQL JOIN).
+
+Types of Joins
+
+Suppose we have two DataFrames:
+
+Left DataFrame (df1):
+
+StudentID	Name
+1	Ravi
+2	Anjali
+3	Kiran
+
+Right DataFrame (df2):
+
+StudentID	Science
+1	80
+2	75
+4	90
+
+👉 pd.merge(df1, df2, on="StudentID", how="inner")
+➡ Keeps only matching rows (INNER JOIN)
+
+Result:
+
+StudentID	Name	Science
+1	Ravi	80
+2	Anjali	75
+
+👉 how="left" → All rows from df1 (LEFT JOIN).
+👉 how="right" → All rows from df2 (RIGHT JOIN).
+👉 how="outer" → Keeps all rows from both (FULL OUTER JOIN).
+
+Concatenation
+
+pd.concat([df1, df2]) → Stacks DataFrames (row-wise or column-wise).
+
+Useful when you have multiple files (like "Marks_Term1.csv", "Marks_Term2.csv").
+
+--------------------------------------------------------------------------------

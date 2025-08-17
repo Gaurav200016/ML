@@ -1,0 +1,50 @@
+Mini Quiz
+
+1) Filtering:
+From a DataFrame df with columns ["Maths", "Science"], 
+how do you select students who scored more than 60 
+in Science and more than 70 in Maths?
+--> 
+high_scorers=
+high_scorers[(high_scorers["Science"]>60) & 
+(high_scorers["Maths"]>70) ]
+----------------------------------------------------------
+
+2) Replacing Missing Values:
+If df["Science"] has missing values (NaN),
+ how can you replace them with the average Science marks?
+ -->
+ df["Science"]=df["Science"].fillna(df["Science"].mean())
+ ----------------------------------------------------------
+ 
+ 3) Sorting:
+ How do you sort the dataframe by Maths scores descending?
+ -->
+ df=
+ df.sort_values(by='Maths',ascending=False)
+ -----------------------------------------------------------
+ 
+ 4) Suppose df has columns ["Maths", "Science"]. 
+ How do you create a new column "Average" with the
+ mean of both subjects?
+ -->
+ df["Average"]=(df["Maths"]+df{"Science"])/2
+ -----------------------------------------------------------
+ 
+ 5) Group Aggregation:
+Your DataFrame has columns:
+ ["Section", "Maths", "Science", "English"].
+How do you calculate the average marks per section?
+--> 
+df=df.sort("Section").agg(
+   Avg_Maths("Maths","mean"),
+   Avg_Science("Science","mean"),
+   Avg_English("English","mean"),
+   Avg_Overall("Average","mean")
+   )
+--------------------------------------------------------------
+ 6) Finding Top Section:
+From the grouped DataFrame (section-wise average),
+how do you find the section with the highest overall average?
+--> 
+top_section = secdf["Average"].idxmax()
