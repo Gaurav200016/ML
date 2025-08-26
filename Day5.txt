@@ -1,0 +1,30 @@
+📌 Topic: pivot_table & crosstab in Pandas
+
+So far we used groupby for aggregation.
+But pandas also gives us pivot-style tools which are super handy when we want to restructure data into a matrix form.
+
+1️⃣ pivot_table
+
+Similar to Excel pivot tables.
+
+Allows rows, columns, values + aggregation.
+
+Syntax:
+
+pd.pivot_table(
+    df,
+    index="row_field",
+    columns="column_field",
+    values="value_field",
+    aggfunc="mean"
+)
+
+2️⃣ crosstab
+
+Used mostly for frequency tables (counts).
+
+Example: count how many students passed/failed per subject.
+
+Syntax:
+
+pd.crosstab(df["Subject"], df["Result"])

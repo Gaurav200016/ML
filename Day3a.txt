@@ -22,3 +22,49 @@ df=df[df["_merge"]=="left_only"]
 -----------------------------------------------------------------------------------------------------------------------
 What happens if you merge where both sides have duplicate keys and you use how="inner"? (One sentence.)
 it will create to duplication
+
+========================================================================================================================
+
+#Show all students with their marks (if present).
+#(Hint: left join students with marks.)
+-->
+
+studentmarks=pd.merge(students,marks,how="left", left_on="ID", right_on="student_id")
+studentmarks=studentmarks.drop(columns=['student_id'])
+studentmarks=studentmarks[~studentmarks.isnull().any(axis=1)]
+studentmarks
+-------------------------------------------------------------------------------------------------------------------------
+
+# Show only the rows where student and marks both exist.
+# (Hint: inner join.)
+
+-->
+stmb=pd.merge(students,marks,how="inner", left_on="ID", right_on="student_id")
+stmb.drop(columns=['student_id'])
+
+--------------------------------------------------------------------------------------------------------------------------
+# Show students with subjects and their teachers, even if the teacher doesn’t exist in teachers.
+# (Hint: join marks with teachers.)
+-->
+
+srm=pd.merge(marks,teachers,how="left",on="Subject")
+---------------------------------------------------------------------------------------------------------------------------
+# Show all students, their subjects, and their teachers in one table.
+# (Hint: chain joins: students → marks → teachers.)
+
+-->
+
+smt= pd.merge(pd.merge(students, marks,how="left",left_on="ID",right_on="student_id"),teachers,on="Subject",how="left")
+smt.drop(columns=['student_id'])
+smt
+
+----------------------------------------------------------------------------------------------------------------------------
+
+# Find the students who have no marks at all.
+# (Hint: outer/left join + filter NaN in Score.)
+
+-->
+snm= pd.merge(students,marks,how="left", left_on="ID", right_on="student_id")
+snm=snm[snm.isnull().any(axis=1)]
+snm
+

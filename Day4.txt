@@ -1,0 +1,127 @@
+Day 4
+Grouping and Aggregation in Pandas
+
+Theory
+* groupby() = split --> apply --> combine
+We use it to summarize data, e.g. average marks per subject,
+highest scorer per class, etc.
+
+-------------------------------------------------------------
+df.groupby("column")["another_column"].agg(["mean", "max", "min"])
+
+Examples with our dataset
+
+1. Average score per subject
+
+marks.groupby("Subject")["Score"].mean()
+
+
+2. Highest score per student
+
+marks.groupby("student_id")["Score"].max()
+
+
+3. Count how many subjects each student has
+
+marks.groupby("student_id")["Subject"].count()
+
+
+4. Multiple aggregations at once
+
+marks.groupby("Subject")["Score"].agg(["mean","max","min"])
+
+🔹 Advanced: Group & Merge
+
+Sometimes we need both student info + grouped results.
+
+Example: Show each student with their average score
+
+avg_scores = marks.groupby("student_id")["Score"].mean().reset_index()
+result = pd.merge(students, avg_scores, left_on="ID", right_on="student_id").drop(columns="student_id")
+
+-------------------------------------------------------------------------------------------------------
+
+📘 Grouping & Aggregations in Pandas (Deep Dive)
+🔹 1. groupby()
+
+Think of it as splitting the data into groups based on some key(s).
+
+After grouping, you must apply an aggregation or transformation.
+
+Example:
+
+marks.groupby("Subject")["Score"].mean()
+
+
+👉 Groups by subject → calculates average score per subject.
+
+🔹 2. agg()
+
+Stands for aggregate.
+
+Lets you run one or multiple aggregations at once.
+
+Example:
+
+marks.groupby("Subject")["Score"].agg(["mean", "max", "min"])
+
+
+👉 Gives average, highest, lowest score per subject.
+
+You can also rename results:
+
+marks.groupby("Subject")["Score"].agg(avg="mean", top="max", low="min")
+
+🔹 3. transform()
+
+Unlike agg(), it returns the same number of rows as the original DataFrame.
+
+Useful when you want to keep row-level data but add grouped info.
+
+Example: Add a new column with average score per subject
+
+marks["avg_subject_score"] = marks.groupby("Subject")["Score"].transform("mean")
+
+
+👉 Each row now knows its subject’s average.
+
+🔹 4. apply()
+
+The most flexible, lets you run a custom function on each group.
+
+But slower than agg() or transform().
+
+Example: Return top 2 scorers per subject
+
+marks.groupby("Subject").apply(lambda x: x.nlargest(2, "Score"))
+
+🔹 Quick Comparison
+Method	Output shape	Use case
+agg()	Reduced (summary per group)	Summaries (avg, max, min)
+transform()	Same as original	Add per-group info back to rows
+apply()	Flexible	Complex logic (e.g., top N rows per group)
+
+=========================================================================================
+
+** Next day
+
+------------------------------------------------------------------------------------------
+
+Groupby with Multiple Aggregations
+
+✅ Pandas Ranking Methods Summary
+
+When you do:
+
+df["Rank"] = df["Score"].rank(method="...", ascending=False)
+
+
+you can choose different ranking strategies.
+
+Method	How it works	Example (Scores: 95, 95, 92, 87, 87, 76)
+"average" (default)	Tied scores get the average of their ranks	95 → 1.5, 92 → 3, 87 → 4.5, 76 → 6
+"min"	Tied scores get the lowest rank in the tie group	95 → 1, 92 → 3, 87 → 4, 76 → 6
+"max"	Tied scores get the highest rank in the tie group	95 → 2, 92 → 3, 87 → 5, 76 → 6
+"first"	Tied scores ranked by order of appearance	First 95 → 1, second 95 → 2, 92 → 3, first 87 → 4, second 87 → 5, 76 → 6
+"dense"	Like "min", but ranks increase without gaps	95 → 1, 92 → 2, 87 → 3, 76 → 4
+"ordinal" (only in Pandas ≥2.0)	Ignores ties, just assigns row order ranks	95 → 1, 95 → 2, 92 → 3, 87 → 4, 87 → 5, 76 → 6
